@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>제목미정</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <!--header-->
+        <div class="RnE_Grid">
+            <div>
+                <a href="/menu" id="menulink">Return to Menu</a>
+            </div>
+            <div id="sortool">
+                <input type="button" value="sort" onclick="">
+            </div>
+            <b><div id="RnE_title">{{mode.upper()}}</div></b>
+            {% if mode=='review' %}
+                <div style="color:white">
+                    (thing)
+                </div>
+            {% elif mode=='edit' %}
+                <div id="deleteButton">
+                    <input type="button" value="DELETE" onclick="
+                        document.getElementById('popup_delete').style.display='block';
+                        document.getElementById('popup_add').style.display='none';
+                    ">
+                </div>
+            {% endif %}
+            {% if mode=='review' %}
+                <div style="color:white">
+                    (thing)
+                </div>
+            {% elif mode=='edit' %}
+                <div id="addButton">
+                    <input type="button" value="ADD" onclick="
+                        document.getElementById('popup_add').style.display='block';
+                        document.getElementById('popup_delete').style.display='none';
+                    ">
+                </div>
+            {% endif %}
+        </div>
+
+        <!--dict addition POPUP-->
+        <div id="popup_add">
+            <form action="/edit" method="POST">
+                <textarea name="inputdata" id="add_txtarea" placeholder="한자훈음 txt 탬플릿을 입력하세요."></textarea>
+                <input type="submit" value="ADD" onclick="
+                    document.getElementById('popup_add').style.display='none';
+                ">
+                <input type="button" value="X" onclick="
+                    document.getElementById('popup_add').style.display='none';
+                ">
+            </form>
+        </div>
+        <!--dict delete POPUP-->
+        <div id="popup_delete">
+            <form action="/edit" method="POST">
+                <input type="submit" value="Delete ALL" onclick="
+                    document.getElementById('popup_delete').style.display='none';
+                ">
+                <input type="submit" value="Delete the Selected" onclick="
+                    document.getElementById('popup_delete').style.display='none';
+                ">
+                <div id="delete_checkbox">
+                    O<input type="checkbox">
+                    X<input type="checkbox">
+                    unstudied<input type="checkbox">
+                </div>
+                <input type="button" value="X" onclick="
+                    document.getElementById('popup_delete').style.display='none';
+                ">
+            </form>
+        </div>
+
+        <!--hanja table-->
+        <div>
+            <table>
+                {% for id in data %}
+                <tr>
+                    <td id="tablestat_{{data[id]['finalstat']}}">{{data[id]['hanja']}}: {{data[id]['hanja']}}</td>
+                </tr>
+            </table>
+        </div>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,82 @@
+
+body    {
+    background-color: rgb(22, 10, 53);
+}
+#grdy   {
+    display: grid;
+    grid-template-rows: 7fr 3fr;
+}
+#temp_title {
+    color: white;
+    text-align: center;
+    font-size: 100px;
+}
+#p2s_img    {
+    text-align: center;
+}
+#menu_txt   {
+    color: white;
+    text-decoration: none;
+    font-size: 50px;
+}
+
+.RnE_Grid   {
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
+    font-size: 40px;
+    text-align: center;
+}
+#RnE_title  {
+    color: white;
+    font-size: 70px;
+    margin: 0px;
+}
+#menulink   {
+    color:powderblue;
+    font-size: 20px;
+    text-decoration: none;
+}
+#sortool    {
+    background-color: palegoldenrod;
+}
+#deleteButton   {
+    background-color: orangered;
+}
+#addButton  {
+    background-color: green;
+}
+
+#popup_add  {
+    background-color: blueviolet;
+    display:none;
+    margin-top: 8%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 30%;
+    padding-right: 30%;
+    text-align: center;
+}
+#popup_delete  {
+    background-color: blueviolet;
+    display:none;
+    margin-top: 8%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 30%;
+    padding-right: 30%;
+    text-align: center;
+}
+#delete_checkbox    {
+    color: white;
+}
+
+
+.settings_Grid  {
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+}
+#settings_title {
+    color:white;
+    font-size: 60px;
+    padding: 2%;
+}
