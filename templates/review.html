@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>제목미정</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <!--header-->
+        <div class="RnE_Grid">
+            <div>
+                <a href="/menu" id="menulink">Return to Menu</a>
+            </div>
+            <div id="sortool">
+                <input type="button" value="sort" onclick="">
+            </div>
+            <b><div id="RnE_title">REVIEW</div></b>
+            <div>
+                some
+            </div>
+            <div>
+                thing
+            </div>
+        </div>
+
+
+        <!--hanja table-->
+        <div>
+            <table class="hanja_table">
+                {% for row in data|batch(5, None) %}    <!--리스트 5개씩 끊어서 새 리스트 만들고 남은 칸은 None으로 채움-->
+                    <tr>
+                        {% for item in row %}   <!--5개짜리 리스트에서 개별 딕셔너리 추출-->
+                            {% if item %}
+                                <td id="tablestat_{{item.finalstat}}">
+                                    {{item.hanja}}: {{item.huneum}}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+
+    </body>
+</html>
