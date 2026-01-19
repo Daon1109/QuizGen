@@ -47,6 +47,7 @@ body    {
 }
 
 #popup_add  {
+    position: relative;
     background-color: blueviolet;
     display:none;
     margin-top: 8%;
@@ -80,3 +81,28 @@ body    {
     font-size: 60px;
     padding: 2%;
 }
+
+.hanja_table    {
+    margin-left: auto;
+    margin-right: auto; 
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    padding: 20px;
+}
+#tablestat_O    {
+    background-color: darkgreen;
+    border: 2px solid white;
+    padding: 15px;
+}
+#tablestat_X    {
+    background-color: darkred;
+    border: 2px solid white;
+    padding: 15px;
+}
+#tablestat_N    {
+    background-color: rgb(69, 69, 69);
+    border: 2px solid white;
+    padding: 15px;
+}
+
