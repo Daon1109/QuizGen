@@ -5,15 +5,16 @@ import pandas as pd
 
 def dictreturn():
     maindict = []
-    with open('C:/Coding/doodles/QuizGen/templates/data.txt', encoding="utf-8") as f:
-        if pd.DataFrame(f).empty:   # 파일 비었는지 확인
-            return []
-        else:
-            raw = f.read().split('\n')
-    for i in range(len(raw)):
-        raw[i] = raw[i].rstrip(',')
-        maindict.append(ast.literal_eval(raw[i]))       #문자열 생긴 거 그대로 맞는 자료형으로 변환(여기선 dict)
-    return maindict
+    with open('C:/Coding/doodles/QuizGen/templates/data.txt', 'r', encoding='utf-8') as f:
+        raw = f.readlines()
+    if pd.DataFrame(raw).empty:
+        return []
+    else:
+        for line in raw:
+            line = line.rstrip(',\n')
+            if line.strip():  # 빈 줄 방지
+                maindict.append(ast.literal_eval(line))       #문자열 생긴 거 그대로 맞는 자료형으로 변환(여기선 dict)
+        return maindict
 
 def dictionerizer(ex_dict, textinput):
     # append dictionary to raw list
@@ -59,7 +60,7 @@ def dictionerizer(ex_dict, textinput):
         if ex_dict==[]:
             pre_input = {"id":1, "hanja":spl_result[id][0], "huneum":spl_result[id][1], "O":0, "X":0, "finalstat":"N", "uTime":0}     # dictionary form
         else:
-            pre_input = {"id":int(ex_dict[len(ex_dict)-1]["id"])+1, "hanja":spl_result[id][0], "huneum":spl_result[id][1], "O":0, "X":0, "uTime":0}     # dictionary form
+            pre_input = {"id":int(ex_dict[len(ex_dict)-1]["id"])+1, "hanja":spl_result[id][0], "huneum":spl_result[id][1], "O":0, "X":0, "finalstat":"N", "uTime":0}     # dictionary form
         ex_dict.append(pre_input)
     for fi in range(len(ex_dict)):
         if fi==0:
@@ -69,24 +70,3 @@ def dictionerizer(ex_dict, textinput):
             f.write(',\n'+str(ex_dict[fi]))
             #result = result+',\n'+str(ex_dict[fi])
     f.close()
-    
-
-
-
-
-
-'''
-# test
-di = [
-    {"id":1, "hanja":"前", "huneum":"앞 전", "O":4, "X":1, "uTime":10},
-    {"id":2, "hanja":"張", "huneum":"베풀 장", "O":3, "X":2, "uTime":10},
-    {"id":3, "hanja":"雙", "huneum":"두 쌍", "O":2, "X":5, "uTime":10},
-    {"id":4, "hanja":"及", "huneum":"미칠 급", "O":3, "X":4, "uTime":10}
-    ]
-txt = "前 앞 전, 張 베풀 장, 雙 두 쌍, 及 미칠 급, 前 앞 전, 張 베풀 장, 俚 속될 리, 前 앞 전, 張 베풀 장, 雙 두 쌍, 及 미칠 급, 俚 속될 리, 前 앞 전, 張 베풀 장, 在 있을 재, 惑 미혹할 혹, 六 여섯 육, 藝 재주 예, 妍 고울 연, 憂 근심 우, 薄 엷을 박, 斯 이 사, 流 흐를 류, 淺 얕을 천, 貧 가난할 빈, 矣 어조사 의"
-afed = ""
-
-dictionerizer([], txt)
-'''
-
-#print(dictreturn())
