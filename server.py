@@ -15,16 +15,17 @@ def menu():
     return render_template('menu.html')
 
 # review
-@app.route('/<rue>')
-def review(rue):
-    return render_template('RnE.html', mode=rue)
+@app.route('/review')
+def review():
+    return render_template('review.html', data=mod.dictreturn())
 
 # edit
-@app.route('/<rue>', methods=['GET', 'POST'])
-def edit(rue):
-    if type(request.form['inputdata'])==str:       # add
-        print(mod.dictionerizer(mod.dictreturn(), request.form['datain']))
-    return render_template('RnE.html', mode=rue, data=mod.dictreturn())
+@app.route('/edit', methods=['GET', 'POST'])
+def edit():
+    if request.method=='POST':
+        if request.form['inputdata']:       # add
+            mod.dictionerizer(mod.dictreturn(), request.form['inputdata'])
+    return render_template('edit.html', data=mod.dictreturn())
 
 # settings
 @app.route('/settings')
