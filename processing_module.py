@@ -70,3 +70,23 @@ def dictionerizer(ex_dict, textinput):
             f.write(',\n'+str(ex_dict[fi]))
             #result = result+',\n'+str(ex_dict[fi])
     f.close()
+    
+
+def dictsort(sortlist):
+    print(sortlist)
+    dict_sorted = []
+    dict_raw = dictreturn()
+    for item in dict_raw:
+        if int(item['O'])>=int(sortlist[3]) and int(item['X'])>=int(sortlist[4]) and int(item['uTime'])>=int(sortlist[5]):
+            if item['finalstat']=='O' and sortlist[0] == 'on':
+                dict_sorted.append(item)
+            elif item['finalstat']=='X' and sortlist[1] == 'on':
+                dict_sorted.append(item)
+            elif item['finalstat']=='N' and sortlist[2] == 'on':
+                dict_sorted.append(item)
+
+    return dict_sorted
+
+
+
+#print(dictreturn())
