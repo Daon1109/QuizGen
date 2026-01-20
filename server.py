@@ -14,10 +14,28 @@ def startpage():
 def menu():
     return render_template('menu.html')
 
+# quiz
+@app.route('/quiz')
+def quiz():
+    return render_template('quizA.html')
+
 # review
 @app.route('/review')
 def review():
-    return render_template('review.html', data=mod.dictreturn())
+    if len(request.args)!=0:          # sort
+        sortargslist = [
+            request.args.get('O', 'off'),
+            request.args.get('X', 'off'),
+            request.args.get('N', 'off'),
+            request.args.get('oNum'),
+            request.args.get('xNum'),
+            request.args.get('uT')
+            ]
+        hanjadict = mod.dictsort(sortargslist)
+    else:
+        hanjadict = mod.dictreturn()
+            
+    return render_template('review.html', data=hanjadict)
 
 # edit
 @app.route('/edit', methods=['GET', 'POST'])
@@ -25,7 +43,20 @@ def edit():
     if request.method=='POST':
         if request.form['inputdata']:       # add
             mod.dictionerizer(mod.dictreturn(), request.form['inputdata'])
-    return render_template('edit.html', data=mod.dictreturn())
+    if len(request.args)!=0:          # sort
+        sortargslist = [
+            request.args.get('O', 'off'),
+            request.args.get('X', 'off'),
+            request.args.get('N', 'off'),
+            request.args.get('oNum'),
+            request.args.get('xNum'),
+            request.args.get('uT')
+            ]
+        hanjadict = mod.dictsort(sortargslist)
+    else:
+        hanjadict = mod.dictreturn()
+            
+    return render_template('edit.html', data=hanjadict)
 
 # settings
 @app.route('/settings')
