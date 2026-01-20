@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>제목미정</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <div id="didpass">
+            {% if score>=qNum*0.8 %}
+                Clear
+            {% else %}
+                Game Over
+            {% endif %}
+        </div>
+        <div id="result">
+            <div id="score">
+                {{score}}/{{qNum}}
+            </div>
+            <div id="timeTaken">
+                
+            </div>
+        </div>
+
+        <div style="color: white; padding:1%;">     <!--TEST-->
+            {% for item in data[0] %}
+                {{item['hanja']}}
+            {% endfor %}<br>
+            {{data[1]}}<br>
+            {{data[2]}}
+        </div>
+        <div>
+            <a href="/menu" id="menulink">Return to Menu</a>
+        </div>
+    </body>
+</html>

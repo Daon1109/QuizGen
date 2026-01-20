@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>제목미정</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <div class="mainQ_A">
+            <div id="qArea_A">
+                Q{{cnt+1}}: {{data['hanja']}}
+            </div>
+            <div id="aArea_A">
+                <form action="/quiz" method="POST">
+                    <input type="text" name="QAA" placeholder="Type Answer Here" autofocus>     <!--autofocus는 커서 바로 input에 들어가게 함-->
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+        </div>
+        <a href="/quiz?reset=True" id="resetbutton_A">RESET QUIZ</a>
+        <div>
+            <a href="/menu" id="menulink">Return to Menu</a>
+        </div>
+    </body>
+</html>
