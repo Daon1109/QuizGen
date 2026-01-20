@@ -88,5 +88,24 @@ def dictsort(sortlist):
     return dict_sorted
 
 
+def grading(qDict, ansList)   :
+    ox_list = []
+    i=0
+    for item in qDict:
+        if item['huneum']==ansList[i]:
+            ox_list.append('O')
+        else:
+            ox_list.append('X')
+        i+=1
+    return ox_list
 
-#print(dictreturn())
+def quizhistory(qDict, ansList, ox_list):
+    result = [qDict, ansList, ox_list]
+    f = open("C:/Coding/doodles/QuizGen/templates/history.txt", 'a', encoding='utf-8')
+    f.write(str(result)+'\n')
+    f.close()
+
+def readhistory(num):
+    f = open("C:/Coding/doodles/QuizGen/templates/history.txt", 'r', encoding='utf-8')
+    history = f.readlines()
+    return history[num]
