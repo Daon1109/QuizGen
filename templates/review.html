@@ -11,9 +11,24 @@
             <div>
                 <a href="/menu" id="menulink">Return to Menu</a>
             </div>
-            <div id="sortool">
-                <input type="button" value="sort" onclick="">
-            </div>
+            <!--sort tool-->
+            <form action="/review" onchange="this.submit()" method="GET">
+                <div id="sortool">
+                    <div>
+                        O <input type="checkbox" name="O" 
+                            {%if request.args.get('O') or request.args|length==0 %}checked{% endif %}><br>
+                        X <input type="checkbox" name="X" 
+                            {%if request.args.get('X') or request.args|length==0 %}checked{% endif %}><br>
+                        Unstudied <input type="checkbox" name="N" 
+                            {%if request.args.get('N') or request.args|length==0 %}checked{% endif %}>
+                    </div>
+                    <div>
+                        O > <input type="number" name="oNum" value="{{request.args.get('oNum', '0')}}">
+                        X > <input type="number" name="xNum" value="{{request.args.get('xNum', '0')}}">
+                        Used Time > <input type="number" name="uT" value="{{request.args.get('uT', '0')}}">
+                    </div>
+                </div>
+            </form>
             <b><div id="RnE_title">REVIEW</div></b>
             <div>
                 some
