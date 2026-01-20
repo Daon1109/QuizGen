@@ -11,9 +11,24 @@
             <div>
                 <a href="/menu" id="menulink">Return to Menu</a>
             </div>
-            <div id="sortool">
-                <input type="button" value="sort" onclick="">
-            </div>
+            <!--sort tool-->
+            <form action="/edit" onchange="this.submit()" method="GET">
+                <div id="sortool">
+                    <div>
+                        O <input type="checkbox" name="O" 
+                            {%if request.args.get('O') or request.args|length==0 %}checked{% endif %}><br>
+                        X <input type="checkbox" name="X" 
+                            {%if request.args.get('X') or request.args|length==0 %}checked{% endif %}><br>
+                        Unstudied <input type="checkbox" name="N" 
+                            {%if request.args.get('N') or request.args|length==0 %}checked{% endif %}>
+                    </div>
+                    <div>
+                        O > <input type="number" name="oNum" value="{{request.args.get('oNum', '0')}}">
+                        X > <input type="number" name="xNum" value="{{request.args.get('xNum', '0')}}">
+                        Used Time > <input type="number" name="uT" value="{{request.args.get('uT', '0')}}">
+                    </div>
+                </div>
+            </form>
             <b><div id="RnE_title">EDIT</div></b>
             <div id="deleteButton">
                 <input type="button" value="DELETE" onclick="
@@ -32,7 +47,7 @@
         <!--dict addition POPUP-->
         <div id="popup_add">
             <form action="/edit" method="POST">
-                <textarea name="inputdata" id="add_txtarea" placeholder="한자훈음 txt 탬플릿을 입력하세요."></textarea>
+                <input type="text" name="inputdata" id="add_inputarea" placeholder="한자훈음 txt 탬플릿을 입력하세요.">
                 <input type="submit" value="ADD" onclick="
                     document.getElementById('popup_add').style.display='none';
                 ">
@@ -47,14 +62,9 @@
                 <input type="submit" value="Delete ALL" onclick="
                     document.getElementById('popup_delete').style.display='none';
                 ">
-                <input type="submit" value="Delete the Selected" onclick="
+                <input type="submit" value="Delete ALL Hanja displayed on Screen" onclick="
                     document.getElementById('popup_delete').style.display='none';
                 ">
-                <div id="delete_checkbox">
-                    O<input type="checkbox">
-                    X<input type="checkbox">
-                    unstudied<input type="checkbox">
-                </div>
                 <input type="button" value="X" onclick="
                     document.getElementById('popup_delete').style.display='none';
                 ">
@@ -77,7 +87,6 @@
                 {% endfor %}
             </table>
         </div>
-
 
 
     </body>
