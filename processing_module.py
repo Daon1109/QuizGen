@@ -88,7 +88,7 @@ def dictsort(sortlist):
     return dict_sorted
 
 
-def grading(qDict, ansList)   :
+def grading(qDict, ansList):
     ox_list = []
     i=0
     for item in qDict:
@@ -99,8 +99,9 @@ def grading(qDict, ansList)   :
         i+=1
     return ox_list
 
-def quizhistory(qDict, ansList, ox_list):
-    result = [qDict, ansList, ox_list]
+
+def writehistory(qDict, ansList, ox_list, uTimeList):
+    result = [qDict, ansList, ox_list, uTimeList]
     f = open("C:/Coding/doodles/QuizGen/templates/history.txt", 'a', encoding='utf-8')
     f.write(str(result)+'\n')
     f.close()
@@ -109,3 +110,29 @@ def readhistory(num):
     f = open("C:/Coding/doodles/QuizGen/templates/history.txt", 'r', encoding='utf-8')
     history = f.readlines()
     return history[num]
+
+
+
+def applyQdata(history):
+    qDict = history[0]
+    ox_list = history[2]
+    uTimeList = history[3]
+    data = dictreturn()
+    i=0
+    for iresult in qDict:           # data editing
+        for idata in data:
+            if iresult == idata:
+                if ox_list[i] == 'O':
+                    idata['O'] += 1
+                    idata['finalstat']='O'
+                else:
+                    idata['X'] += 1
+                    idata['finalstat']='X'
+                idata['uTime']=uTimeList[i]
+        i+=1
+    ppced_data = str(data).strip()[1:-1]         # 전처리ㅋㅋ
+    ppced_data = ppced_data.replace("}, ", "},\n")
+    print(ppced_data)
+    f = open("C:/Coding/doodles/QuizGen/templates/data.txt", 'w', encoding='utf-8')
+    f.write(ppced_data+',')
+    f.close()
