@@ -18,6 +18,7 @@ def menu():
     session.clear()
     return render_template('menu.html')
 
+
 # quiz
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
@@ -28,6 +29,7 @@ def quiz():
         session['quizset'] = quizset
         session['answerset'] = []
         session['cnt'] = 0
+        session['uTime'] = []
     # history 설정(이전 세트 불러오기용)
     if 'history' not in session:
         session['history'] = []
@@ -35,6 +37,7 @@ def quiz():
     quizset = session['quizset']
     answerset = session['answerset']
     cnt = session['cnt']
+    uTimeList = session['uTime']
 
     if request.args.get('reset'):               # reset quiz(GET)
         session.clear()
@@ -45,21 +48,34 @@ def quiz():
             answerset.append(request.form['QAA'])
             session['answerset'] = answerset
             session['cnt'] = cnt+1
+            uTimeList.append(int(request.form['uTime']))
+            session['uTime'] = uTimeList
     if session['cnt']>=len(quizset):            # quiz finished
         session['history'].append(quizset)
         session.clear()                         # reset quizset
         ox_list = mod.grading(quizset, answerset)
-        mod.quizhistory(quizset, answerset, ox_list)    # save result
+        mod.writehistory(quizset, answerset, ox_list, uTimeList)    # save result
 
         return redirect('/score')
-    else:
+    else:                                       # continue quiz
         return render_template('quizA.html', data=quizset[session['cnt']], cnt=session['cnt'])
 
+
 # score
-@app.route('/score')
+@app.route('/score', methods=['GET', 'POST'])
 def score():
     recentRes = ast.literal_eval(mod.readhistory(-1))        # history 중 마지막 기록 꺼내기
-    return render_template('score.html', data=recentRes, score=recentRes[2].count('O'), qNum=len(recentRes[2]))
+    ttt = sum(recentRes[3])
+    tstr = f"{str(ttt//60).zfill(2)}:{str(ttt%60).zfill(2)}"
+    if request.method=='POST':
+        if request.form['applychoice']:
+            if request.form['applychoice']=="Yes":
+                mod.applyQdata(recentRes)       # data.txt에 적용
+                return redirect('/menu')
+            elif request.form['applychoice']=="No":
+                return redirect('/menu')
+    return render_template('score.html', data=recentRes, score=recentRes[2].count('O'), qNum=len(recentRes[2]), tstr=tstr)
+
 
 # review
 @app.route('/review')
