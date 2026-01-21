@@ -6,6 +6,23 @@
         <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     </head>
     <body>
+        <!--applyData POPUP-->
+        <div id="popup_applyData">
+            <div id="applyQ_A">Apply this result to the database?</div><br>
+            <form action="/score" method="POST">
+                <input type="submit" name="applychoice" value="Yes" onclick="
+                    document.getElementById('popup_applyData').style.display='none';
+                ">
+                <input type="submit" name="applychoice" value="No" onclick="
+                    document.getElementById('popup_applyData').style.display='none';
+                ">
+            </form>
+            <input type="button" value="X" onclick="
+                document.getElementById('popup_applyData').style.display='none';
+            ">
+        </div>
+
+        <!--scoreboard-->
         <div id="didpass">
             {% if score>=qNum*0.8 %}
                 Clear
@@ -18,7 +35,7 @@
                 {{score}}/{{qNum}}
             </div>
             <div id="timeTaken">
-                
+                {{tstr}}
             </div>
         </div>
 
@@ -27,10 +44,14 @@
                 {{item['hanja']}}
             {% endfor %}<br>
             {{data[1]}}<br>
-            {{data[2]}}
+            {{data[2]}}<br>
+            {{data[3]}}
         </div>
+        <!--return to menu: applying result to DB-->
         <div>
-            <a href="/menu" id="menulink">Return to Menu</a>
+            <a href="#" id="menulink" onclick="
+                document.getElementById('popup_applyData').style.display='block'
+            ">Return to Menu</a>
         </div>
     </body>
 </html>
