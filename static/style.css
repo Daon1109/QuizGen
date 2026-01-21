@@ -22,8 +22,7 @@ body    {
 
 .RnE_Grid   {
     display: grid;
-    grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
-    font-size: 40px;
+    grid-template-columns: 1fr 3fr 8fr 2fr 2fr;
     text-align: center;
 }
 #RnE_title  {
@@ -33,11 +32,13 @@ body    {
 }
 #menulink   {
     color:powderblue;
-    font-size: 20px;
+    font-size: 15px;
     text-decoration: none;
 }
 #sortool    {
     background-color: palegoldenrod;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 #deleteButton   {
     background-color: orangered;
@@ -56,6 +57,10 @@ body    {
     padding-left: 30%;
     padding-right: 30%;
     text-align: center;
+}
+#add_inputarea  {
+    width: 200px;
+    height: 50px;
 }
 #popup_delete  {
     background-color: blueviolet;
@@ -106,3 +111,50 @@ body    {
     padding: 15px;
 }
 
+.mainQ_A    {
+    display: grid;
+    grid-template-columns: 8fr 8fr 1fr;
+}
+#qArea_A    {
+    text-decoration: solid;
+    color: white;
+    font-size: 50px;
+}
+#timer_A    {
+    color:white;
+    font-size: 40px;
+    padding: 5%;
+}
+#resetbutton_A  {
+    color: powderblue;
+    font-size: 30px;
+}
+
+#didpass    {
+    color: white;
+    padding: 0.5%;
+    font-size: 100px;
+}
+#score  {
+    color: white;
+    padding: 1%;
+    font-size: 60px;
+}
+#timeTaken  {
+    color: white;
+    padding: 1%;
+    font-size: 30px;
+}
+#popup_applyData  {
+    background-color: blueviolet;
+    display:none;
+    margin-top: 8%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 30%;
+    padding-right: 30%;
+    text-align: center;
+}
+#applyQ_A   {
+    color:white;
+}
